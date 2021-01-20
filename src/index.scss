@@ -1,0 +1,21 @@
+$mygrey: #f5f5f7;
+$mydarkgrey: #858199;
+$myblack: #242230;
+
+@mixin center-alles {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #e5e5e5;
+  width: 100vw;
+  height: 100vh;
+  @include center-alles;
+}
