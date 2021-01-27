@@ -1,6 +1,37 @@
 .price-container {
-  width: 28.75rem;
-  height: 29.125rem;
-  background: #ffffff;
+  width: 25rem;
+  height: 7.5rem;
+  background: #f5f5f7;
   border-radius: 25px;
+  position: absolute;
+  bottom: 1.875rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .devide {
+    height: 60%;
+    width: 0.2rem;
+    background: #858199;
+    opacity: 0.2;
+    border-radius: 2px;
+  }
+  .wrapper {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: center;
+    flex-direction: column;
+    :first-child {
+      color: #858199;
+      font-weight: 600;
+      font-size: 16px;
+      line-height: 26px;
+    }
+    :last-child {
+      color: #242230;
+      line-height: 51px;
+      font-size: 32px;
+    }
+  }
 }
