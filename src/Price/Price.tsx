@@ -1,6 +1,9 @@
+import { useItemData } from '../DataProvider';
 import './Price.scss';
 
 function Price() {
+  const data = useItemData();
+
   return (
     <div className="price-container">
       <div className="wrapper">

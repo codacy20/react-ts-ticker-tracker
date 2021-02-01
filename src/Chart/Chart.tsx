@@ -48,7 +48,6 @@ function Chart() {
           <XAxis dataKey="name" />
           <Bar dataKey="pv" fill="#6853DF" />
           <Bar dataKey="uv" fill="#FF6666" />
-          <Tooltip />
         </BarChart >
       </ResponsiveContainer>
     </div>
