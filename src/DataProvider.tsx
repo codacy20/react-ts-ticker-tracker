@@ -1,7 +1,6 @@
 import React from "react";
 import { ApiRequests } from "./ApiRequests";
-
-type ContextState = { status: 'LOADING' | 'ERROR' } | { status: 'LOADED'; value: { name: string } };
+import { ContextState, Status } from "./Models/ContextState.model";
 
 const Context = React.createContext<ContextState | null>(null);
 
@@ -15,20 +14,20 @@ export const useItemData = (): ContextState => {
 
 export const ItemDataProvider: React.FC<{ param: string }> = (props) => {
     const [state, setState] =
-        React.useState<ContextState>({ status: 'LOADING' });
+        React.useState<ContextState>({ status: Status.LOADING, value: null });
 
     React.useEffect(() => {
-        setState({ status: 'LOADING' });
+        setState({ status: Status.LOADING, value: null });
 
         (async (): Promise<void> => {
-            const result = await ApiRequests.loadItemData(props.param);
-            if (result.ok) {
+            const result = await ApiRequests(props.param);
+            if (result) {
                 setState({
-                    status: 'LOADED',
-                    value: result,
+                    status: Status.LOADED,
+                    value: { current: result.c, open: result.o },
                 });
             } else {
-                setState({ status: 'ERROR' });
+                setState({ status: Status.ERROR, value: null });
             }
         })();
     }, [props.param]);
