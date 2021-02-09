@@ -1,12 +1,12 @@
-import { useItemData } from '../DataProvider';
-import { ContextState, Status } from '../Models/ContextState.model';
+import { useItemData } from '../Util/DataProvider';
+import { ContextState } from '../Models/ContextState.model';
 import './Price.scss';
 
 function Price() {
   const data: ContextState = useItemData();
 
-  const open = <span>${data.value?.open}</span>;
-  const current = <span>${data.value?.current}</span>;
+  const open = <span>${data.value?.open[0]}</span>;
+  const current = <span>${data.value?.current[0]}</span>;
 
   return (
     <div className="price-container">

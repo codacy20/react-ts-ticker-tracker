@@ -2,7 +2,7 @@ import './App.scss';
 import Price from '../Price/Price';
 import Chart from '../Chart/Chart';
 import React from 'react';
-import { ItemDataProvider } from '../DataProvider';
+import { ItemDataProvider } from '../Util/DataProvider';
 
 function App() {
   return (

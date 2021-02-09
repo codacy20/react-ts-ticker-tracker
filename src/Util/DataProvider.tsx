@@ -1,6 +1,6 @@
 import React from "react";
-import { ApiRequests } from "./ApiRequests";
-import { ContextState, Status } from "./Models/ContextState.model";
+import { getCandlesRequest } from "./ApiRequests";
+import { ContextState, Status } from "../Models/ContextState.model";
 
 const Context = React.createContext<ContextState | null>(null);
 
@@ -20,11 +20,11 @@ export const ItemDataProvider: React.FC<{ param: string }> = (props) => {
         setState({ status: Status.LOADING, value: null });
 
         (async (): Promise<void> => {
-            const result = await ApiRequests(props.param);
+            const result = await getCandlesRequest(props.param);
             if (result) {
                 setState({
                     status: Status.LOADED,
-                    value: { current: result.c, open: result.o },
+                    value: { current: result.c, open: result.o, time: result.t },
                 });
             } else {
                 setState({ status: Status.ERROR, value: null });

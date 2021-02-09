@@ -1,54 +1,36 @@
 import './Chart.scss';
-import { ResponsiveContainer, BarChart, XAxis, CartesianGrid, Tooltip, Bar } from 'recharts';
+import { ResponsiveContainer, LineChart, XAxis, YAxis, CartesianGrid, Tooltip, Line } from 'recharts';
+import { ContextState } from '../Models/ContextState.model';
+import { useItemData } from '../Util/DataProvider';
+import { createCandleWeek } from '../Util/createCandleWeek.mapper';
+import { Day } from '../Models/Day.model';
+
+
+function generateChartData(input: Day[] | []) {
+  const result: unknown[] = [];
+  input.forEach((day: Day, index: number) => {
+    result.push({ name: `Day ${index + 1}`, current: day.current, open: day.open });
+  });
+  return result;
+}
 
 function Chart() {
-  const data = [
-    {
-      "name": "Page A",
-      "uv": 4000,
-      "pv": 2400
-    },
-    {
-      "name": "Page B",
-      "uv": 3000,
-      "pv": 1398
-    },
-    {
-      "name": "Page C",
-      "uv": 2000,
-      "pv": 9800
-    },
-    {
-      "name": "Page D",
-      "uv": 2780,
-      "pv": 3908
-    },
-    {
-      "name": "Page E",
-      "uv": 1890,
-      "pv": 4800
-    },
-    {
-      "name": "Page F",
-      "uv": 2390,
-      "pv": 3800
-    },
-    {
-      "name": "Page G",
-      "uv": 3490,
-      "pv": 4300
-    }
-  ];
-
+  const data: ContextState = useItemData();
+  const week = createCandleWeek(data.value);
+  const generatedChartData = generateChartData(week);
+  
   return (
     <div className="chart-container">
       <ResponsiveContainer width="105%" height="100%">
-        <BarChart data={data}
+        <LineChart data={generatedChartData}
           margin={{ top: 20, right: 30, left: 0, bottom: 0 }}>
+          <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="name" />
-          <Bar dataKey="pv" fill="#6853DF" />
-          <Bar dataKey="uv" fill="#FF6666" />
-        </BarChart >
+          <YAxis domain={[0, 200]} tickCount={6} />
+          <Tooltip />
+          <Line type="monotone" dataKey="open" stroke="#6853DF" />
+          <Line type="monotone" dataKey="current" stroke="#FF6666" />
+        </LineChart>
       </ResponsiveContainer>
     </div>
   );
